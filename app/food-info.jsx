@@ -1,5 +1,5 @@
-import { Text } from 'react-native';
+import {BottomDrawerTrigger} from "../components/BottomDrawer";
 
 export default function Page() {
-  return <Text>Top-level page</Text>;
+    return <BottomDrawerTrigger/>;
 }
