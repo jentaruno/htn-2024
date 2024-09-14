@@ -1,0 +1,47 @@
+[
+    {
+        "productName": "манная с маслом",
+        "productNameTranslation": "semolina with butter",
+        "description": "Creamy semolina porridge (similar to grits) with butter",
+        "possibleAllergens": [
+            "Dairy",
+            "Gluten"
+        ]
+    },
+    {
+        "productName": "Гречка с маслом",
+        "productNameTranslation": "buckwheat with butter",
+        "description": "Buckwheat porridge with butter",
+        "possibleAllergens": [
+            "Dairy",
+            "Gluten"
+        ]
+    },
+    {
+        "productName": "овсянка с маслом",
+        "productNameTranslation": "oatmeal with butter",
+        "description": "oatmeal porridge with butter",
+        "possibleAllergens": [
+            "Dairy",
+            "Gluten"
+        ]
+    },
+    {
+        "productName": "Рисовая с маслом",
+        "productNameTranslation": "rice with butter",
+        "description": "rice porridge with butter",
+        "possibleAllergens": [
+            "Dairy",
+            "Gluten"
+        ]
+    },
+    {
+        "productName": "пшенная с маслом",
+        "productNameTranslation": "millet with butter",
+        "description": "millet porridge with butter",
+        "possibleAllergens": [
+            "Dairy",
+            "Gluten"
+        ]
+    }
+]
