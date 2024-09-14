@@ -1,0 +1,10 @@
+{
+    "productName": "string",
+    "productNameTranslation": "string",
+    "description": "string",
+    "possibleAllergens": "string[]",
+    "top": "number",
+    "left": "number",
+    "width": "number",
+    "height": "number"
+}
