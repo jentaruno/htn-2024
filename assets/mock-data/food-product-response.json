@@ -6,7 +6,11 @@
         "possibleAllergens": [
             "Dairy",
             "Gluten"
-        ]
+        ],
+        "top": 123,
+        "left": 90,
+        "width": 95,
+        "height": 23
     },
     {
         "productName": "Гречка с маслом",
@@ -15,7 +19,11 @@
         "possibleAllergens": [
             "Dairy",
             "Gluten"
-        ]
+        ],
+        "top": 150,
+        "left": 90,
+        "width": 110,
+        "height": 22
     },
     {
         "productName": "овсянка с маслом",
@@ -24,7 +32,11 @@
         "possibleAllergens": [
             "Dairy",
             "Gluten"
-        ]
+        ],
+        "top": 181,
+        "left": 90,
+        "width": 98,
+        "height": 22
     },
     {
         "productName": "Рисовая с маслом",
@@ -33,7 +45,11 @@
         "possibleAllergens": [
             "Dairy",
             "Gluten"
-        ]
+        ],
+        "top": 210,
+        "left": 90,
+        "width": 98,
+        "height": 22
     },
     {
         "productName": "пшенная с маслом",
@@ -42,6 +58,10 @@
         "possibleAllergens": [
             "Dairy",
             "Gluten"
-        ]
+        ],
+        "top": 240,
+        "left": 90,
+        "width": 110,
+        "height": 22
     }
 ]
