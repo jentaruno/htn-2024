@@ -1,7 +1,6 @@
-import {StatusBar} from 'expo-status-bar';
-import {Button, Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import {useEffect, useRef, useState} from 'react';
-import {Camera, CameraView} from 'expo-camera';
+import {Button, StyleSheet, Text, View} from 'react-native';
+import {useRef, useState} from 'react';
+import CameraContent from "../components/CameraContent";
 
 export default function App() {
     let cameraRef = useRef();
@@ -26,7 +25,6 @@ export default function App() {
             <Text>{!photo && "Position the menu in the frame"}</Text>
             <CameraContent
                 photo={photo}
-                setPhoto={setPhoto}
                 cameraRef={cameraRef}
             />
             {photo
@@ -41,53 +39,11 @@ export default function App() {
     )
 }
 
-function CameraContent({photo, setPhoto, cameraRef}) {
-    const [hasCameraPermission, setHasCameraPermission] = useState();
-
-    useEffect(() => {
-        (async () => {
-            const cameraPermission = await Camera.requestCameraPermissionsAsync();
-            setHasCameraPermission(cameraPermission.status === "granted");
-        })();
-    }, []);
-
-    if (hasCameraPermission === undefined) {
-        return <Text>Requesting permissions...</Text>
-    } else if (!hasCameraPermission) {
-        return <Text>Permission for camera not granted. Please change this in settings.</Text>
-    }
-
-    if (photo) {
-        return (
-            <SafeAreaView style={styles.contentContainer}>
-                <Image style={styles.preview} source={{uri: "data:image/jpg;base64," + photo.base64}}/>
-            </SafeAreaView>
-        );
-    }
-
-    return (
-        <View style={styles.contentContainer}>
-            <CameraView style={styles.cameraView} ref={cameraRef}>
-                <StatusBar style="auto"/>
-            </CameraView>
-        </View>
-    );
-}
-
-const styles = StyleSheet.create({
+const styles = StyleSheet.create(({
     container: {
         marginTop: 70,
         alignItems: 'center',
         gap: 20
-    },
-    contentContainer: {
-        width: 300,
-        height: 600
-    },
-    cameraView: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     buttonGroup: {
         display: 'flex',
@@ -99,8 +55,4 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignSelf: 'flex-end'
     },
-    preview: {
-        alignSelf: 'stretch',
-        flex: 1
-    }
-});
+}))
