@@ -5,8 +5,44 @@ import {Camera, CameraView} from 'expo-camera';
 
 export default function App() {
     let cameraRef = useRef();
-    const [hasCameraPermission, setHasCameraPermission] = useState();
     const [photo, setPhoto] = useState();
+    let takePic = async () => {
+        let options = {
+            quality: 1,
+            base64: true,
+            exif: false
+        };
+
+        let newPhoto = await cameraRef.current.takePictureAsync(options);
+        setPhoto(newPhoto);
+    };
+
+    function confirmPic() {
+
+    }
+
+    return (
+        <View style={styles.container}>
+            <Text>{!photo && "Position the menu in the frame"}</Text>
+            <CameraContent
+                photo={photo}
+                setPhoto={setPhoto}
+                cameraRef={cameraRef}
+            />
+            {photo
+                ? <View style={styles.buttonGroup}>
+                    <Button title="Confirm" onPress={confirmPic}/>
+                    <Button title="Discard" onPress={() => setPhoto(undefined)}/>
+                </View>
+                : <View style={styles.buttonGroup}>
+                    <Button title="Take Pic" onPress={takePic}/>
+                </View>}
+        </View>
+    )
+}
+
+function CameraContent({photo, setPhoto, cameraRef}) {
+    const [hasCameraPermission, setHasCameraPermission] = useState();
 
     useEffect(() => {
         (async () => {
@@ -21,47 +57,19 @@ export default function App() {
         return <Text>Permission for camera not granted. Please change this in settings.</Text>
     }
 
-    let takePic = async () => {
-        let options = {
-            quality: 1,
-            base64: true,
-            exif: false
-        };
-
-        let newPhoto = await cameraRef.current.takePictureAsync(options);
-        setPhoto(newPhoto);
-    };
-
     if (photo) {
-        let confirmPic = () => {
-
-        };
-
         return (
-            <View style={styles.container}>
-                <Text></Text>
-                <SafeAreaView style={styles.contentContainer}>
-                    <Image style={styles.preview} source={{uri: "data:image/jpg;base64," + photo.base64}}/>
-                </SafeAreaView>
-                <View style={styles.buttonGroup}>
-                    <Button title="Confirm" onPress={confirmPic}/>
-                    <Button title="Discard" onPress={() => setPhoto(undefined)}/>
-                </View>
-            </View>
+            <SafeAreaView style={styles.contentContainer}>
+                <Image style={styles.preview} source={{uri: "data:image/jpg;base64," + photo.base64}}/>
+            </SafeAreaView>
         );
     }
 
     return (
-        <View style={styles.container}>
-            <Text>Position the menu in the frame</Text>
-            <View style={styles.contentContainer}>
-                <CameraView style={styles.cameraView} ref={cameraRef}>
-                    <StatusBar style="auto"/>
-                </CameraView>
-            </View>
-            <View style={styles.buttonGroup}>
-                <Button title="Take Pic" onPress={takePic}/>
-            </View>
+        <View style={styles.contentContainer}>
+            <CameraView style={styles.cameraView} ref={cameraRef}>
+                <StatusBar style="auto"/>
+            </CameraView>
         </View>
     );
 }
