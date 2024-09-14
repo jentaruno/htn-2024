@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "scheme": "htn-2024-scheme",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
