@@ -2,20 +2,16 @@ import {StatusBar} from 'expo-status-bar';
 import {Button, Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {useEffect, useRef, useState} from 'react';
 import {Camera, CameraView} from 'expo-camera';
-import * as MediaLibrary from 'expo-media-library';
 
 export default function App() {
     let cameraRef = useRef();
     const [hasCameraPermission, setHasCameraPermission] = useState();
-    const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState();
     const [photo, setPhoto] = useState();
 
     useEffect(() => {
         (async () => {
             const cameraPermission = await Camera.requestCameraPermissionsAsync();
-            const mediaLibraryPermission = await MediaLibrary.requestPermissionsAsync();
             setHasCameraPermission(cameraPermission.status === "granted");
-            setHasMediaLibraryPermission(mediaLibraryPermission.status === "granted");
         })();
     }, []);
 
@@ -37,30 +33,33 @@ export default function App() {
     };
 
     if (photo) {
-        let savePhoto = () => {
-            MediaLibrary.saveToLibraryAsync(photo.uri).then(() => {
-                setPhoto(undefined);
-            });
+        let confirmPic = () => {
+
         };
 
         return (
             <View style={styles.container}>
-                <SafeAreaView style={styles.cameraContainer}>
+                <Text></Text>
+                <SafeAreaView style={styles.contentContainer}>
                     <Image style={styles.preview} source={{uri: "data:image/jpg;base64," + photo.base64}}/>
-                    {hasMediaLibraryPermission && <Button title="Save" onPress={savePhoto}/>}
-                    <Button title="Discard" onPress={() => setPhoto(undefined)}/>
                 </SafeAreaView>
+                <View style={styles.buttonGroup}>
+                    <Button title="Confirm" onPress={confirmPic}/>
+                    <Button title="Discard" onPress={() => setPhoto(undefined)}/>
+                </View>
             </View>
         );
     }
 
     return (
         <View style={styles.container}>
-            <View style={styles.cameraContainer}>
+            <Text>Position the menu in the frame</Text>
+            <View style={styles.contentContainer}>
                 <CameraView style={styles.cameraView} ref={cameraRef}>
                     <StatusBar style="auto"/>
                 </CameraView>
-                <Text>Position the menu in the frame</Text>
+            </View>
+            <View style={styles.buttonGroup}>
                 <Button title="Take Pic" onPress={takePic}/>
             </View>
         </View>
@@ -69,16 +68,24 @@ export default function App() {
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: 'center'
+        marginTop: 70,
+        alignItems: 'center',
+        gap: 20
     },
-    cameraContainer: {
+    contentContainer: {
         width: 300,
-        height: 600,
+        height: 600
     },
     cameraView: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    buttonGroup: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10
     },
     buttonContainer: {
         backgroundColor: '#fff',
