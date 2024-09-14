@@ -1,6 +1,7 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {useRef, useState} from 'react';
 import CameraContent from "../components/CameraContent";
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 export default function App() {
     let cameraRef = useRef();
@@ -27,21 +28,46 @@ export default function App() {
                 photo={photo}
                 cameraRef={cameraRef}
             />
-            {photo
-                ? <View style={styles.buttonGroup}>
-                    <Button title="Confirm" onPress={confirmPic}/>
-                    <Button title="Discard" onPress={() => setPhoto(undefined)}/>
-                </View>
-                : <View style={styles.buttonGroup}>
-                    <Button title="Take Pic" onPress={takePic}/>
-                </View>}
+            <View style={styles.buttonGroup}>
+                <FontAwesome.Button
+                    color={'#000000'}
+                    backgroundColor={'#ffffff'}
+                    borderRadius={100}
+                    size={30}
+                    iconStyle={styles.buttonIcon}
+                    name={"rotate-right"}
+                    onPress={() => setPhoto(undefined)}
+                />
+                {photo
+                    ? <Pressable style={styles.button} onPress={confirmPic}>
+                        <Text style={styles.text}>Confirm</Text>
+                    </Pressable>
+                    : <FontAwesome.Button
+                        color={'#000000'}
+                        backgroundColor={'#f9a61f'}
+                        borderRadius={100}
+                        iconStyle={styles.buttonIcon}
+                        size={40}
+                        name="camera"
+                        onPress={takePic}/>
+                }
+                <FontAwesome.Button
+                    color={'#000000'}
+                    backgroundColor={'#ffffff'}
+                    borderRadius={100}
+                    size={30}
+                    iconStyle={styles.buttonIcon}
+                    name={"image"}
+                    onPress={() => setPhoto(undefined)}
+                />
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create(({
     container: {
-        marginTop: 70,
+        margin: 'auto',
         alignItems: 'center',
         gap: 20
     },
@@ -51,8 +77,13 @@ const styles = StyleSheet.create(({
         alignItems: 'center',
         gap: 10
     },
-    buttonContainer: {
-        backgroundColor: '#fff',
-        alignSelf: 'flex-end'
+    button: {
+        color: '#000000',
+        backgroundColor: '#f9a61f',
+        padding: 12,
+        borderRadius: 100
     },
+    buttonIcon: {
+        marginLeft: 8
+    }
 }))
