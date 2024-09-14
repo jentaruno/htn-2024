@@ -1,12 +1,14 @@
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {useRef, useState} from 'react';
 import CameraContent from "../components/CameraContent";
+import * as ImagePicker from 'expo-image-picker';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 export default function App() {
     let cameraRef = useRef();
     const [photo, setPhoto] = useState();
-    let takePic = async () => {
+
+    async function takePic() {
         let options = {
             quality: 1,
             base64: true,
@@ -14,8 +16,22 @@ export default function App() {
         };
 
         let newPhoto = await cameraRef.current.takePictureAsync(options);
-        setPhoto(newPhoto);
-    };
+        setPhoto("data:image/jpg;base64," + newPhoto.base64);
+    }
+
+    async function pickImage() {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [1, 2],
+            quality: 1,
+        });
+
+        if (!result.canceled) {
+            setPhoto(result.assets[0].uri);
+        }
+    }
 
     function confirmPic() {
 
@@ -58,7 +74,7 @@ export default function App() {
                     size={30}
                     iconStyle={styles.buttonIcon}
                     name={"image"}
-                    onPress={() => setPhoto(undefined)}
+                    onPress={pickImage}
                 />
             </View>
         </View>
