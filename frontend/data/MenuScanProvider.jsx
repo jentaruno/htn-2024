@@ -1,6 +1,6 @@
 import {createContext, useContext, useEffect, useState} from "react";
 
-const GET_INFO_API_LINK = "localhost:8000/"
+const GET_INFO_API_LINK = "https://d55d-129-97-124-106.ngrok-free.app/get-food-info"
 const MenuScanContext = createContext(undefined);
 
 export function useMenuScan () {
@@ -14,7 +14,7 @@ export function useMenuScan () {
 export function MenuScanProvider({children}) {
     const [isLoading, setIsLoading] = useState(false);
     const [menuImage, setMenuImage] = useState(null);
-    const [foodInfo, setFoodInfo] = useState(null);
+    const [menuInfo, setMenuInfo] = useState(null);
 
     async function fetchFoodInfo(image) {
         if (!image) return;
@@ -26,18 +26,16 @@ export function MenuScanProvider({children}) {
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: image
                 }
             );
 
             if (!response.ok) {
-                throw new Error("Failed to fetch food info");
+                throw Error("Failed to fetch food info");
             }
             const data = await response.json();
-            setFoodInfo(data);
-            console.log(data);
+            setMenuInfo(data);
         } catch (e) {
-            throw Error("Failed to fetch user data: ", e);
+            throw Error("Failed to fetch user data: " + e);
         }
     }
 
@@ -45,7 +43,7 @@ export function MenuScanProvider({children}) {
         setIsLoading(true);
         const handleScanImage = async () => {
             try {
-                await fetchFoodInfo(menuImage.base64);
+                await fetchFoodInfo(menuImage);
             } catch (e) {
                 console.error(e);
             } finally {
@@ -58,8 +56,8 @@ export function MenuScanProvider({children}) {
     const value = {
         menuImage,
         setMenuImage,
-        foodInfo,
-        setFoodInfo
+        menuInfo,
+        setMenuInfo
     };
 
     return (

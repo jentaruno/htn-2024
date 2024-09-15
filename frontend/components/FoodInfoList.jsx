@@ -2,19 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {FoodInfoItem} from "./FoodInfoItem";
 
-const FoodInfoListItem = [
-  {
-    "productName": "пшенная с маслом",
-    "productNameTranslation": "millet with butter",
-    "description": "millet porridge with butter",
-    "possibleAllergens": [
-      "Wheat",
-      "Milk"
-    ]
-  }
-];
-
-export default function FoodInfo() {
+export default function FoodInfoList({foodInfos}) {
   const [selectedFood, setSelectedFood] = useState(null);
 
   // Function to get color based on the number
@@ -29,7 +17,7 @@ export default function FoodInfo() {
 
   return (
     <View style={styles.container}>
-      {FoodInfoListItem.map((food, index) => (
+      {foodInfos && foodInfos.length > 0 && foodInfos.map((food, index) => (
         <FoodInfoItem
             key={index}
             buttonColor={getButtonColor(food.possibleAllergens.length)}
