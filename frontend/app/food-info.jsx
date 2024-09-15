@@ -19,6 +19,8 @@ export default function Page() {
 const styles = StyleSheet.create({
     container: {
         height: "100%",
-        padding: 20,
+        paddingHorizontal: 20,
+        paddingVertical: 40,
+        backgroundColor: '#F9F5ED'
     },
 });

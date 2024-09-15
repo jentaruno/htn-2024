@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, Pressable } from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, Image, Pressable, ScrollView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -47,7 +47,8 @@ export default function FoodInfo({foodInfos}) {
         </Pressable>
       </View>
       <Text style={styles.title}>Menu Information</Text>
-      {foodInfos && foodInfos.length > 0 && foodInfos.map((food, index) => (
+      <ScrollView style={styles.scrollView}>
+        {foodInfos && foodInfos.length > 0 && foodInfos.map((food, index) => (
         <View key={index} style={styles.foodItem}>
           <TouchableOpacity
             style={[
@@ -76,7 +77,8 @@ export default function FoodInfo({foodInfos}) {
           )}
         </View>
       ))}
-      </View>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -165,5 +167,9 @@ const styles = StyleSheet.create({
   allergenText: {
     fontSize: 14,
     color: '#000',
+  },
+  scrollView: {
+    marginHorizontal: 20,
+    marginBottom: 100
   },
 });

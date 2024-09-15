@@ -86,9 +86,11 @@ export default function App() {
 
 const styles = StyleSheet.create(({
     container: {
-        margin: 'auto',
+        height: '100%',
+        justifyContent: 'center',
         alignItems: 'center',
-        gap: 20
+        gap: 20,
+        backgroundColor: '#F9F5ED'
     },
     buttonGroup: {
         display: 'flex',
