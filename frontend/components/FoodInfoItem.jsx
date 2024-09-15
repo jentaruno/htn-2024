@@ -35,6 +35,10 @@ export function FoodInfoItem(
 }
 
 const styles = StyleSheet.create({
+    foodItem: {
+        width: '100%',
+        marginBottom: 10,
+    },
     button: {
         padding: 15,
         marginVertical: 5,

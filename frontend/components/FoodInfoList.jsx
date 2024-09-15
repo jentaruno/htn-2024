@@ -47,13 +47,10 @@ export default function FoodInfo() {
 
 const styles = StyleSheet.create({
   container: {
+    display: "flex",
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-  },
-  foodItem: {
-    width: '100%',
-    marginBottom: 10,
   },
 });
