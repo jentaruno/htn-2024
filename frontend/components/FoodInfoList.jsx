@@ -109,12 +109,13 @@ export default function FoodInfo() {
           )}
         </View>
       ))}
-    </View>
+      </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  listContainer: {
+    display: "flex",
     flex: 1,
     padding: 20,
     justifyContent: 'flex-start',

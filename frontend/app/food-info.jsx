@@ -1,6 +1,24 @@
-//import {BottomDrawerTrigger} from "../components/BottomDrawer";
 import FoodInfoList from "../components/FoodInfoList";
+import {useMenuScan} from "../data/MenuScanProvider";
+import {ActivityIndicator, StyleSheet, View} from "react-native";
 
 export default function Page() {
-    return <FoodInfoList/>;   
+    const {isLoading, menuInfo} = useMenuScan();
+
+    return (
+        <View style={styles.container}>
+            {isLoading
+                ? <ActivityIndicator size={"large"}/>
+                : <FoodInfoList foodInfos={menuInfo}/>
+            }
+        </View>
+    );
 }
+
+
+const styles = StyleSheet.create({
+    container: {
+        height: "100%",
+        padding: 20,
+    },
+});
