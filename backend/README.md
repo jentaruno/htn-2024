@@ -1,0 +1,2 @@
+- Install with `npm install`
+- Run server with `npx nodemon server.js`
