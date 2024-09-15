@@ -1,2 +1,4 @@
 /node_modules/
 .env
+application_default_credentials.json
+allergies-htn2024-2e0db498d935.json

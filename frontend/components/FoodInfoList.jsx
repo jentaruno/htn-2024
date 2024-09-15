@@ -4,53 +4,20 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const allergenIcons = { //stays the same
-  Dairy: require("../assets/Milk.png"),
-  Gluten: require("../assets/gluten.png"),
-  Peanuts: require("../assets/peanuts.png"),
-  Sulphite: require("../assets/sulphite.png"),
-  Sesame: require("../assets/sesame.png"),
-  Wheat: require("../assets/wheat.png"),
-  Mustard: require("../assets/mustard.png"),
-  Gelatin: require("../assets/gelatin.png"),
-  Soy: require("../assets/soy.png"),
-  Eggs: require("../assets/eggs.png"),
+  dairy: require("../assets/Milk.png"),
+  gluten: require("../assets/gluten.png"),
+  peanuts: require("../assets/peanuts.png"),
+  sulphite: require("../assets/sulphite.png"),
+  sesame: require("../assets/sesame.png"),
+  wheat: require("../assets/wheat.png"),
+  mustard: require("../assets/mustard.png"),
+  gelatin: require("../assets/gelatin.png"),
+  soy: require("../assets/soy.png"),
+  eggs: require("../assets/eggs.png"),
 };
-
-const FoodInfoListItem = [
-    {
-      original: "манная с маслом",
-      name: "Semolina with Butter (2)",
-      allergens: ["Dairy", "Gluten"],
-      number: 2
-    },
-    {
-      original: "Гречка с маслом",
-      name: "Buckwheat with Butter (9)",
-      allergens: ["Dairy", "Gluten", "Peanuts", "Sulphite", "Sesame", "Wheat", "Mustard", "Gelatin", "Soy"],
-      number: 9
-    },
-    {
-      original: "овсянка с маслом",
-      name: "Oatmeal with Butter (2)",
-      allergens: ["Dairy", "Gluten"],
-      number: 2
-    },
-    {
-      original: "Рисовая с маслом",
-      name: "Rice with Butter (2)",
-      allergens: ["Dairy", "Gluten"],
-      number: 2
-    },
-    {
-      original: "пшенная с маслом",
-      name: "Millet with Butter (4)",
-      allergens: ["Dairy", "Gluten", "Peanuts", "Eggs"],
-      number: 4
-    }
-  ];
   
 
-export default function FoodInfo() {
+export default function FoodInfo({foodInfos}) {
   const [selectedFood, setSelectedFood] = useState(null);
   const navigation = useNavigation();
 
@@ -80,7 +47,7 @@ export default function FoodInfo() {
         </Pressable>
       </View>
       <Text style={styles.title}>Menu Information</Text>
-      {FoodInfoListItem.map((food, index) => (
+      {foodInfos && foodInfos.length > 0 && foodInfos.map((food, index) => (
         <View key={index} style={styles.foodItem}>
           <TouchableOpacity
             style={[

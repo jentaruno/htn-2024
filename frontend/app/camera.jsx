@@ -19,7 +19,7 @@ export default function App() {
         };
 
         let newPhoto = await cameraRef.current.takePictureAsync(options);
-        setPhoto("data:image/jpg;base64," + newPhoto.base64);
+        setPhoto(newPhoto.base64);
     }
 
     async function pickImage() {

@@ -22,7 +22,7 @@ export default function CameraContent({photo, cameraRef}) {
     if (photo) {
         return (
             <SafeAreaView style={styles.contentContainer}>
-                <Image style={styles.preview} source={{uri: photo}}/>
+                <Image style={styles.preview} source={{uri: "data:image/jpg;base64," + photo}}/>
             </SafeAreaView>
         );
     }

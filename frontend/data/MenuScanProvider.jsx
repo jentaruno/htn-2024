@@ -18,26 +18,47 @@ export function MenuScanProvider({children}) {
 
     async function fetchFoodInfo(image) {
         if (!image) return;
-        try {
-            const response = await fetch(
-                GET_INFO_API_LINK,
-                {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
+        console.log(image);
 
-            if (!response.ok) {
-                throw Error("Failed to fetch food info");
+        while (true && !false) {
+            try {
+                const response = await fetch(
+                    GET_INFO_API_LINK,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            image: {
+                                data: image,
+                            }
+                        })
+                    }
+                );
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setMenuInfo(data);
+                    break;
+                }
+            } catch(e) {
             }
-            const data = await response.json();
-            setMenuInfo(data);
-        } catch (e) {
-            throw Error("Failed to fetch user data: " + e);
         }
     }
+
+        //     let tries = 0;
+        //     while (!response.ok) {
+        //         tries++;
+        //         if (tries < 3)
+        //             await fetchFoodInfo(image);
+        //         else
+        //             throw Error("Failed to fetch food info");
+        //     }
+        // } catch (e) {
+        //     throw Error("Failed to fetch user data: " + e);
+        // }
+
 
     useEffect(() => {
         setMenuInfo(null);

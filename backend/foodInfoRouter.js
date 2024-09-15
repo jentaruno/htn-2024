@@ -19,8 +19,13 @@ async function picToText(inputFile) {
     const client = new vision.ImageAnnotatorClient();
 
     // Performs text detection on the local file
-    const [result] = await client.textDetection(inputFile);
-    return result.fullTextAnnotation.text;
+    try {
+        const [result] = await client.textDetection(inputFile);
+        console.log(result);
+        return result.fullTextAnnotation.text;
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 const groq = new Groq({ apiKey: process.env.GROQ_KEY });
@@ -114,7 +119,7 @@ Using these item names and translations, fill out an array of objects described 
  *   }
  * }
  */
-router.get("/get-food-info", async (req, res, next) => {
+router.post("/get-food-info", async (req, res, next) => {
     try {
         const imageData = req?.body?.image?.data;
         // console.log(req?.body);
