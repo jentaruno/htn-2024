@@ -1,21 +1,11 @@
-//import {BottomDrawerTrigger} from "../components/BottomDrawer";
 import FoodInfoList from "../components/FoodInfoList";
-import {useState} from "react";
 import {useMenuScan} from "../data/MenuScanProvider";
+import {ActivityIndicator} from "react-native";
 
 export default function Page() {
-    const [foodInfos, setFoodInfos] = useState([
-        {
-            "productName": "пшенная с маслом",
-            "productNameTranslation": "millet with butter",
-            "description": "millet porridge with butter",
-            "possibleAllergens": [
-                "Wheat",
-                "Milk"
-            ]
-        }
-    ]);
-    const {menuInfo} = useMenuScan();
+    const {isLoading, menuInfo} = useMenuScan();
 
-    return <FoodInfoList foodInfos={menuInfo}/>;
+    return isLoading
+        ? <ActivityIndicator size={"large"}/>
+        : <FoodInfoList foodInfos={menuInfo}/>;
 }

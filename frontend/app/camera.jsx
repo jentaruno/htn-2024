@@ -1,5 +1,5 @@
 import {Pressable, StyleSheet, Text, View} from 'react-native';
-import {useEffect, useRef, useState} from 'react';
+import {useRef, useState} from 'react';
 import CameraContent from "../components/CameraContent";
 import * as ImagePicker from 'expo-image-picker';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
@@ -9,8 +9,7 @@ import { router } from 'expo-router';
 export default function App() {
     let cameraRef = useRef();
     const [photo, setPhoto] = useState();
-    const [confirmed, setConfirmed] = useState(false);
-    const {isLoading, menuImage, setMenuImage} = useMenuScan();
+    const {setMenuImage} = useMenuScan();
 
     async function takePic() {
         let options = {
@@ -38,14 +37,8 @@ export default function App() {
 
     function confirmPic() {
         setMenuImage(photo);
-        setConfirmed(true);
+        router.navigate("/food-info");
     }
-
-    useEffect(() => {
-        if (confirmed && !isLoading && menuImage) {
-            router.navigate("/food-info");
-        }
-    }, [confirmed, isLoading, menuImage]);
 
     return (
         <View style={styles.container}>

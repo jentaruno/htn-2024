@@ -40,6 +40,7 @@ export function MenuScanProvider({children}) {
     }
 
     useEffect(() => {
+        setMenuInfo(null);
         setIsLoading(true);
         const handleScanImage = async () => {
             try {
@@ -54,6 +55,7 @@ export function MenuScanProvider({children}) {
     }, [menuImage]);
 
     const value = {
+        isLoading,
         menuImage,
         setMenuImage,
         menuInfo,
@@ -62,7 +64,7 @@ export function MenuScanProvider({children}) {
 
     return (
         <MenuScanContext.Provider value={value}>
-            {!isLoading && children}
+            {children}
         </MenuScanContext.Provider>
     );
 }
