@@ -16,7 +16,7 @@ export default function FoodInfoList({foodInfos}) {
   };
 
   return (
-    <View style={styles.container}>
+      <View style={styles.listContainer}>
       {foodInfos && foodInfos.length > 0 && foodInfos.map((food, index) => (
         <FoodInfoItem
             key={index}
@@ -29,16 +29,15 @@ export default function FoodInfoList({foodInfos}) {
                 ? setSelectedFood(-1)
                 : setSelectedFood(index)}/>
       ))}
-    </View>
+      </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  listContainer: {
     display: "flex",
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
-  },
-});
+  }
+})
