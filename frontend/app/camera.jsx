@@ -3,10 +3,13 @@ import {useRef, useState} from 'react';
 import CameraContent from "../components/CameraContent";
 import * as ImagePicker from 'expo-image-picker';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import {useMenuScan} from "../data/MenuScanProvider";
+import { router } from 'expo-router';
 
 export default function App() {
     let cameraRef = useRef();
     const [photo, setPhoto] = useState();
+    const {setMenuImage} = useMenuScan();
 
     async function takePic() {
         let options = {
@@ -20,7 +23,6 @@ export default function App() {
     }
 
     async function pickImage() {
-        // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
@@ -34,6 +36,8 @@ export default function App() {
     }
 
     function confirmPic() {
+        setMenuImage(photo);
+        router.navigate("/food-info")
 
     }
 

@@ -17,6 +17,7 @@ export function MenuScanProvider({children}) {
     const [foodInfo, setFoodInfo] = useState(null);
 
     async function fetchFoodInfo(image) {
+        if (!image) return;
         try {
             const response = await fetch(
                 GET_INFO_API_LINK,
