@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {Dimensions, Modal, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import FoodInfoList from './FoodInfoList';
 
 export function BottomDrawerTrigger() {
     const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
@@ -53,7 +54,7 @@ export default function BottomDrawer({isOpen, handleClose}) {
                     </TouchableOpacity>
                 </View>
                 <View>
-                    <Text>asbdkabksjdb</Text>
+                    <FoodInfoList></FoodInfoList>
                 </View>
             </View>
         </Modal>
