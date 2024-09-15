@@ -1,37 +1,16 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {FoodInfoItem} from "./FoodInfoItem";
 
 const FoodInfoListItem = [
   {
-    productName: "манная с маслом",
-    productNameTranslation: "Semolina with Butter (2)",
-    possibleAllergens: ["Dairy", "Gluten"],
-    number: 2
-  },
-  {
-    productName: "Гречка с маслом",
-    productNameTranslation: "Buckwheat with Butter (9)",
-    possibleAllergens: ["Dairy", "Gluten", "Peanuts", "Sulphite", "Sesame Seeds", "Wheat & Triticale", "Mustard", "Gelatin", "Soy"],
-    number: 9
-  },
-  {
-    productName: "овсянка с маслом",
-    productNameTranslation: "Oatmeal with Butter (2)",
-    possibleAllergens: ["Dairy", "Gluten"],
-    number: 2
-  },
-  {
-    productName: "Рисовая с маслом",
-    productNameTranslation: "Rice with Butter (2)",
-    possibleAllergens: ["Dairy", "Gluten"],
-    number: 2
-  },
-  {
-    productName: "пшенная с маслом",
-    productNameTranslation: "Millet with Butter (4)",
-    possibleAllergens: ["Dairy", "Gluten", "Peanuts", "Eggs"],
-    number: 4
+    "productName": "пшенная с маслом",
+    "productNameTranslation": "millet with butter",
+    "description": "millet porridge with butter",
+    "possibleAllergens": [
+      "Wheat",
+      "Milk"
+    ]
   }
 ];
 
@@ -58,7 +37,9 @@ export default function FoodInfo() {
             originalName={food.productName}
             possibleAllergens={food.possibleAllergens}
             isSelected={selectedFood === index}
-            onPress={() => setSelectedFood(index)}/>
+            onPress={() => selectedFood === index
+                ? setSelectedFood(-1)
+                : setSelectedFood(index)}/>
       ))}
     </View>
   );
