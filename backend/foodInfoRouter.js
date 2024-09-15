@@ -91,10 +91,12 @@ translated: ${translated}
 
 Using these item names and translations, fill out an array of objects described by the below schema
 {
-    "item-name": "string (the name of the item, taken from above list)",
-    "item-translation": "string (the translation of the item, taken from the above list)",
+    "original": "string (the name of the item, taken from above list)",
+    "name": "string (the translation of the item, taken from the above list)",
     "description": "string (a brief description of the item)",
-    "allergens": "[]string (an array of the names of all of the allergens present in the item, all allergens should be one of [dairy, gluten, peanuts, sulphites, sesame, wheat, mustard, gelatin, soy])"}`, "You are a expert in foreign cuisines and the allergies that they come with. You only respond in JSON format")
+    "allergens": "[]string (an array of the names of all of the allergens present in the item, all allergens should be one of [dairy, gluten, peanuts, sulphites, sesame, wheat, mustard, gelatin, soy]),
+    "number": "number (the number of items in "allergens")"
+"}`, "You are a expert in foreign cuisines and the allergies that they come with. You only respond in JSON format")
 
     try {
         return JSON.parse(res?.choices[0]?.message?.content)
