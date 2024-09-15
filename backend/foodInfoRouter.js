@@ -40,13 +40,13 @@ async function getGroqChatCompletion(message, system) {
     }
 
     return groq.chat.completions.create({
-        messages,
+        messages: messages,
         model: "llama3-8b-8192",
     });
 }
 
 async function groqFoodFilter(text) {
-    const res = await getGroqChatCompletion("Filter the food items out of the following. Do not include bullet points and extra words. Make sure there is a newline between each item: \n\n" + text)
+    const res = await getGroqChatCompletion("Filter the food items out of the following. Do not include bullet points, numbers, and extra words. Make sure there is a newline between each item: \n\n" + text, "You are an advanced and multilingual text filtering robot similar to C-3PO from starwars")
 
     return res?.choices[0]?.message?.content?.split('\n').filter(entry => entry && entry.length > 0);
 }
@@ -94,8 +94,7 @@ Using these item names and translations, fill out an array of objects described 
     "item-name": "string (the name of the item, taken from above list)",
     "item-translation": "string (the translation of the item, taken from the above list)",
     "description": "string (a brief description of the item)",
-    "allergens": "[]{"name": string, "isPresent": bool (whether or not the allergen is present in the item)} (this array should contain an entry for every allergen in [dairy, gluten, peanuts, sulphites, sesame, wheat, mustard, gelatin, soy])"
-}`, "You are a expert in foreign cuisines and the allergies that they come with. You only respond in JSON format")
+    "allergens": "[]string (an array of the names of all of the allergens present in the item, all allergens should be one of [dairy, gluten, peanuts, sulphites, sesame, wheat, mustard, gelatin, soy])"}`, "You are a expert in foreign cuisines and the allergies that they come with. You only respond in JSON format")
 
     try {
         return JSON.parse(res?.choices[0]?.message?.content)
@@ -134,9 +133,9 @@ router.get("/get-food-info", async (req, res, next) => {
             // described = await groqFoodDescription(filtered)
             translated = await translateText(filtered.join("\n"));
 
-            // console.log(`data: ${data}`)
-            // console.log(`filtered: ${filtered}`)
-            // console.log(`translated: ${translated}`)
+            console.log(`data: ${data}`)
+            console.log(`filtered: ${filtered}`)
+            console.log(`translated: ${translated}`)
             // console.log(`described: ${described}`)
 
             if (translated.length != filtered.length) {
