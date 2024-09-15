@@ -1,8 +1,8 @@
 require('dotenv').config();
 const Groq = require('groq-sdk');
 
-const apiKey = process.env.GROQ_API_KEY;
-const groq = new Groq({apiKey: apiKey});
+const apiKey = process.env.GROQ_KEY;
+const groq = new Groq({ apiKey: apiKey });
 
 async function findAllergens(foodItem) {
     const prompt = "give me a list of allergens for the food that the user is looking for. return only a list of allergens as a JSON array of strings, no need to respond with any additional information.";
